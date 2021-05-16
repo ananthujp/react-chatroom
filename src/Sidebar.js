@@ -13,11 +13,21 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import {useSelector} from "react-redux"
 import {selectUser} from "./features/userSlice";
 import db,{ auth } from './firebase';
+import ArrowBackIosIcon from '@material-ui/icons/KeyboardArrowRight';
 
 function Sidebar() {
     const user=useSelector(selectUser)
     const [channels,setChannels] = useState([]);
-
+    const [toggle,setToggle] = useState(false);
+    const toggleChannelsList=()=>{
+        
+        if(!toggle){
+            document.getElementsByClassName("sidebar__channelsList")[0].style.visibility="hidden";
+            setToggle(true);
+            }else{
+            document.getElementsByClassName("sidebar__channelsList")[0].style.visibility="visible";
+            setToggle(false);}
+    }
     useEffect(() =>{
         db.collection('channels')
         .onSnapshot(snapshot => (setChannels(snapshot.docs.map(doc=>(
@@ -44,8 +54,8 @@ function Sidebar() {
 
         <div className="sidebar__channels">
             <div className="sidebar__channelsHeader">
-                <div className="sidebar__header">
-                    <ExpandMoreIcon/>
+                <div className="sidebar__header" onClick={toggleChannelsList}>
+                    {!toggle?<ExpandMoreIcon/>: <ArrowBackIosIcon/> }
                     <h4>Text Channels</h4>
                     <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
                 </div>

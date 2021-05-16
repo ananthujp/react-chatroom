@@ -23,7 +23,7 @@ function Chat() {
         if(channelId){
         db.collection('channels').doc(channelId).collection('messages')
         .orderBy('timestamp','desc').onSnapshot((snapshot) =>
-            setMessages(snapshot.docs.map((doc)=>doc.data())));
+            setMessages(snapshot.docs.map((doc)=>({id:doc.id,data:doc.data()}))));
         }
     }, [channelId])
     const sendMessage = (e) => {
@@ -41,9 +41,10 @@ function Chat() {
             <div className="chat__messages">
                 {messages.map((message)=>
                  <Message 
-                    timestamp={message.timestamp}
-                    message={message.message}
-                    user={message.user}
+                    key={message.id}
+                    timestamp={message.data.timestamp}
+                    message={message.data.message}
+                    user={message.data.user}
                 />)}
                 
             </div>

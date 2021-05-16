@@ -16,7 +16,8 @@
     border-bottom: 3px solid #26282c;
 }
 .sidebar__channels {
-    flex:1
+    flex:1;
+    overflow: auto;
 }
 .sidebar__addChannel{
     cursor: pointer;
@@ -35,6 +36,7 @@
 .sidebar__header{
     display: flex;
     align-items:center;
+    cursor: pointer;
 }
 
 .sidebar__voice,.sidebar__profile{
