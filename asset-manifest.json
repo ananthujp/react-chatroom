@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-chatroom/static/css/main.0a1cb321.chunk.css",
-    "main.js": "/react-chatroom/static/js/main.533cb8ea.chunk.js",
-    "main.js.map": "/react-chatroom/static/js/main.533cb8ea.chunk.js.map",
+    "main.js": "/react-chatroom/static/js/main.aeefc501.chunk.js",
+    "main.js.map": "/react-chatroom/static/js/main.aeefc501.chunk.js.map",
     "runtime-main.js": "/react-chatroom/static/js/runtime-main.6423cef1.js",
     "runtime-main.js.map": "/react-chatroom/static/js/runtime-main.6423cef1.js.map",
     "static/js/2.25f15a05.chunk.js": "/react-chatroom/static/js/2.25f15a05.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.6423cef1.js",
     "static/js/2.25f15a05.chunk.js",
     "static/css/main.0a1cb321.chunk.css",
-    "static/js/main.533cb8ea.chunk.js"
+    "static/js/main.aeefc501.chunk.js"
   ]
 }
