@@ -37,3 +37,7 @@
     flex: 1;
     overflow: auto;
 }
+.addIcon{
+    font-size: larger;
+    cursor: pointer;
+}

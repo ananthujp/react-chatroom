@@ -14,3 +14,11 @@
     font-size: 30px;
     padding: 8px;
 }
+.hide__btn{
+    margin-left: auto;
+    margin-right: 1px;
+    cursor: pointer;
+  }
+.hide__btn:hover{
+    color: red;
+  }

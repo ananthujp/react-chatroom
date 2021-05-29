@@ -15,12 +15,13 @@ import {selectUser} from "./features/userSlice";
 import db,{ auth } from './firebase';
 import ArrowBackIosIcon from '@material-ui/icons/KeyboardArrowRight';
 
+
 function Sidebar() {
     const user=useSelector(selectUser)
     const [channels,setChannels] = useState([]);
     const [toggle,setToggle] = useState(false);
+
     const toggleChannelsList=()=>{
-        
         if(!toggle){
             document.getElementsByClassName("sidebar__channelsList")[0].style.visibility="hidden";
             setToggle(true);
@@ -42,6 +43,7 @@ function Sidebar() {
         if(channelName) {
             db.collection("channels").add({
                 channelName: channelName,
+                userAdmin: user.displayName,
             })
         }
     }
@@ -62,7 +64,7 @@ function Sidebar() {
             </div>
                 <div className="sidebar__channelsList">
                     {channels.map(({id,channel}) =>
-                    <SidebarChannel key={id} id={id} channelName={channel.channelName}/>
+                    <SidebarChannel key={id} id={id} channelName={channel.channelName} admin={channel.userAdmin}/>
                     )}
                 </div>
             </div>
