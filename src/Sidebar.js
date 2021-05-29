@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
 import SidebarChannel from "./SidebarChannel.js"
 import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt';
+import SignalCellularOffIcon from '@material-ui/icons/SignalCellularOff';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CallIcon from '@material-ui/icons/Call';
 import {Avatar } from '@material-ui/core';
@@ -20,7 +21,7 @@ function Sidebar() {
     const user=useSelector(selectUser)
     const [channels,setChannels] = useState([]);
     const [toggle,setToggle] = useState(false);
-
+    const [voice,voiceToggle]= useState(false);
     const toggleChannelsList=()=>{
         if(!toggle){
             document.getElementsByClassName("sidebar__channelsList")[0].style.visibility="hidden";
@@ -68,20 +69,21 @@ function Sidebar() {
                     )}
                 </div>
             </div>
-            <div className="sidebar__voice">
+            <div onClick={()=> voice?voiceToggle(false):voiceToggle(true)} className="sidebar__voice">
+                {voice?<SignalCellularOffIcon  
+                    className='sidebar__voiceIcon2'
+                    fontSize="large"/>:
                 <SignalCellularAltIcon 
                     className='sidebar__voiceIcon'
-                    fontSize="large"/>
-            <div className="sidebar__voiceInfo">
-                <h3>Voice Connected</h3>
-                <p>Stream</p>
-            </div>
-
-            <div className="sidebar__voiceIcons">
-                <InfoOutlinedIcon />
-                <CallIcon />
-            </div>
-            
+                    fontSize="large"/>}
+                <div className={voice?'sidebar__voiceInfo2':'sidebar__voiceInfo'}>
+                    <h3 >Voice {voice?"Disconnected":"Connected"}</h3>
+                    <p>Stream</p>
+                </div>
+                <div className="sidebar__voiceIcons">
+                    <InfoOutlinedIcon />
+                    <CallIcon />
+                </div>
             </div>
             <div className="sidebar__profile">
                 <Avatar src={user.photo} onClick={()=>auth.signOut()}/>

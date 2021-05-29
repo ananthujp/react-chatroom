@@ -51,7 +51,7 @@ function Chat() {
             <ChatHeader channelName={channelName}/>
             <div className="chat__messages">
            
-                {messages.map((message)=>
+                {messages.map((message,i)=>
                  <Message 
                     key={message.id}
                     key_id={message.id}
@@ -60,6 +60,8 @@ function Chat() {
                     message={message.data.message}
                     user={message.data.user}
                     img={message.data.img}
+                    lm={(parseInt(messages.length)-1)===i?true:false}
+                    messagesEnd={messagesEnd}
                 />)}
               <div style={{ float:"left", clear: "both",padding: "40px" }}
              ref={(el) => { messagesEnd = el; }}>
@@ -74,7 +76,7 @@ function Chat() {
 
                 <div className="chat__inputIcons">
                     <CardGiftcardIcon fontSize="large" />
-                    <GifIcon fontSize="large" />
+                    <GifIcon onClick={imgHandle} cursor="pointer" fontSize="large" />
                     <EmojiEmotionsIcon fontSize="large" />
                 </div>
             </div>
