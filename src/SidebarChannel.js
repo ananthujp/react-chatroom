@@ -24,7 +24,7 @@ function SidebarChannel({id,channelName,admin}) {
          )
     }
     >
-            <h4><span className='sidebarChannel__hash'>#</span>{channelName}{(admin===userID.displayName) ?<CloseIcon  onClick={removeChannel} className="hide__btn"/>:<></>}</h4>
+            <h4><span className='sidebarChannel__hash'>#</span>{channelName}{(admin===userID.displayName) ?<CloseIcon  onClick={removeChannel} className="hide__btn_c"/>:<></>}</h4>
         </div>
     );
 }

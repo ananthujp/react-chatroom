@@ -23,6 +23,9 @@ function Chat() {
     const [imgtoggle,setImgtoggle]=useState(false);
     const [giftoggle,setgiftoggle]=useState(false);
     const [messages,setMessages]=useState([]);
+    const scrollToBottom = () => {
+        messagesEnd.scrollIntoView({ behavior: "smooth" });
+      }
     useEffect(() => {
         if(channelId){
         db.collection('channels').doc(channelId).collection('messages')
@@ -46,21 +49,19 @@ function Chat() {
         (imgtoggle)?setImgtoggle(false):setImgtoggle(true);
     }
     const handleGif=(e)=>{
-        db.collection('channels').doc(channelId).collection('messages').add({
+        channelId?db.collection('channels').doc(channelId).collection('messages').add({
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
             message:e.images.fixed_height.url,
             user:user,
             img:true,
-        })
+        }):<></>;
         setgiftoggle(false);
     }
-    const scrollToBottom = () => {
-        messagesEnd.scrollIntoView({ behavior: "smooth" });
-      }
+    
     return (
-        <div className="chat">
+        <div className="chat" >
             <ChatHeader channelName={channelName}/>
-            <div className="chat__messages">
+            <div className="chat__messages" onClick={()=>setgiftoggle(false)}>
            
                 {messages.map((message,i)=>
                  <Message 
