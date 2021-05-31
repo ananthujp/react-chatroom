@@ -12,6 +12,7 @@ import { selectChannelId, selectChannelName } from './features/appSlice';
 import { selectUser} from './features/userSlice';
 import db from "./firebase"
 import firebase from "firebase"
+import ReactGiphySearchbox from "react-giphy-searchbox";
 
 function Chat() {
     var messagesEnd = React.createRef()
@@ -20,6 +21,7 @@ function Chat() {
     const channelName = useSelector(selectChannelName);
     const [input,setInput]=useState("");
     const [imgtoggle,setImgtoggle]=useState(false);
+    const [giftoggle,setgiftoggle]=useState(false);
     const [messages,setMessages]=useState([]);
     useEffect(() => {
         if(channelId){
@@ -42,6 +44,15 @@ function Chat() {
     }
     const imgHandle=()=>{
         (imgtoggle)?setImgtoggle(false):setImgtoggle(true);
+    }
+    const handleGif=(e)=>{
+        db.collection('channels').doc(channelId).collection('messages').add({
+            timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+            message:e.images.fixed_height.url,
+            user:user,
+            img:true,
+        })
+        setgiftoggle(false);
     }
     const scrollToBottom = () => {
         messagesEnd.scrollIntoView({ behavior: "smooth" });
@@ -67,6 +78,16 @@ function Chat() {
              ref={(el) => { messagesEnd = el; }}>
              </div>
             </div>
+            {giftoggle? <div className="gify__inp">
+                <ReactGiphySearchbox
+                    apiKey="9Ixlv3DWC1biJRI57RanyL7RTbfzz0o7"
+                    onSelect={(item)=>handleGif(item)}
+                    masonryConfig={[
+                    { columns: 2, imageWidth: 110, gutter: 5 },
+                    { mq: "700px", columns: 3, imageWidth: 120, gutter: 5 }
+                    ]}
+                />
+            </div>:<></>}
             <div className="chat__input">
             {(imgtoggle)?<ImageIcon onClick={imgHandle} className="addIcon" fontSize="large"/>:<AddCircleIcon onClick={imgHandle} fontSize="large" className="addIcon"/>}
                 <form>
@@ -76,7 +97,7 @@ function Chat() {
 
                 <div className="chat__inputIcons">
                     <CardGiftcardIcon fontSize="large" />
-                    <GifIcon onClick={imgHandle} cursor="pointer" fontSize="large" />
+                    <GifIcon onClick={()=> giftoggle?setgiftoggle(false):setgiftoggle(true)} cursor="pointer" fontSize="large" />
                     <EmojiEmotionsIcon fontSize="large" />
                 </div>
             </div>

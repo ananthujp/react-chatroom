@@ -5,7 +5,27 @@
     background-color: #363a3f;
     height: 100vh;
 }
-
+.gify__inp{
+    position: absolute;
+    z-index: 60;
+    bottom: 110px;
+    right: 100px;
+    background-color: #474b53;
+    padding:10px;
+    border-radius: 5px;
+}
+.gify__inp:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 10px solid #474b53;
+    border-left: 10px solid transparent;
+    border-top: 10px solid #474b53;
+    border-bottom: 10px solid transparent;
+    right: 0px;
+    bottom: -15px;
+  }
 .chat__input{
     color: lightgray;
     display: flex;
